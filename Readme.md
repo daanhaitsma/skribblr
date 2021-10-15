@@ -32,6 +32,5 @@ This creates a nicely formatted list which can be copied straight into a javascr
 ## TODO
 * Add Dutch words
 * Watch the chat to remove any suggestions that have already been guessed by other players
-* Remove suggestions as they are pressed, as it apparently is incorrect
 * Upgrade the guesser to a backend or something with proper storage, so the word list can easily be expanded whenever a drawn word was not known yet
 * If there is only one guess left, automatically submit that one

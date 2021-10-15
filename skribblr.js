@@ -5,6 +5,7 @@ $('body').append(`<div id="words" style="background:white"></div>`);
 function submitWord(word) {
     $('#inputChat').val(word);
     $('#formChat').submit();
+    $(`[data-word="${word}"`).remove();
 }
 
 $('#currentWord').bind('DOMSubtreeModified', () => {
@@ -16,8 +17,8 @@ $('#currentWord').bind('DOMSubtreeModified', () => {
 
     const matchesHtml = wordList
         .filter(word => regex.test(word))
-        .map(word => `<a href="javascript:submitWord('${word}')" style="color:black">${word}</a>`)
-        .join('<br>');
+        .map(word => `<a href="javascript:submitWord('${word}')" data-word="${word}" style="color:black">${word}<br></a>`)
+        .join('');
 
     $('#words').html(matchesHtml);
 });
