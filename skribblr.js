@@ -1,28 +1,26 @@
 const wordList = getWords();
 
-$('body').append('<div id="words" style="background:white"></div>')
+$('body').append(`<div id="words" style="background:white"></div>`);
 
 function submitWord(word) {
-    $("#inputChat").val(word);
+    $('#inputChat').val(word);
     $('#formChat').submit();
 }
 
-function listWords() {
-    $('#words').html('');
+$('#currentWord').bind('DOMSubtreeModified', () => {
+    $('#words').html(``);
 
     const hint = $('#currentWord').text();
+    const regexHint = hint.replaceAll('_', '\\S');
+    const regex = new RegExp(`^${regexHint}$`);
 
-    const regex = new RegExp('^' + hint.replaceAll('_', '\\S') + '$');
-
-    const matches = wordList
+    const matchesHtml = wordList
         .filter(word => regex.test(word))
         .map(word => `<a href="javascript:submitWord('${word}')" style="color:black">${word}</a>`)
         .join('<br>');
 
-    $('#words').html(matches);
-}
-
-$("#currentWord").bind('DOMSubtreeModified', listWords);
+    $('#words').html(matchesHtml);
+});
 
 
 function getWords() {
